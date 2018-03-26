@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from letter.models import Letter
 
 def home(request):
-    return render(request, 'letters.html',{})
+	letter_M = Letter.objects.get(letter='M')
+	return render(request, 'letters.html', {'letter': letter_M})
