@@ -9,19 +9,28 @@ if(selected == $(this).prop("id")) {
     selected = $(this).prop("id");
 	$(".magicL .letterStroke").css("stroke", "black");
 	$("#colorSelector").show();
-	var colorText = $(this).find(".letterFill").css("fill");
+  var colorText = $(this).find(".letterFill").css("fill");
+  console.log(colorText);
+  $('#cp1').colorpicker().on('colorpickerChange colorpickerCreate', function (e) {
+        console.log(e.color.toString(e.color.toHex()))
+        colorText = e.color.toString(e.color.toHex());
+        $("#" + selected + " .letterFill").css("fill", colorText);
+      });
+        // potential outline TODO e.color.complement().toRgbString());
+
+  /*
 	var colorArr = colorText.substr(4, colorText.length - 5).split(", ");
 	var hslArr = rgb2hsl(colorArr);
 	$("#sliderH").val(hslArr[0]);
 	$("#sliderS").val(hslArr[1]);
 	$("#sliderL").val(hslArr[2]);
-	colorText = "rgb("+(255-colorArr[0])+", "+(255-colorArr[1])+", "+(255-colorArr[2])+")";
+	colorText = "rgb("+(255-colorArr[0])+", "+(255-colorArr[1])+", "+(255-colorArr[2])+")";*/
 	$(this).find(".letterStroke").css("stroke", colorText);
 }
 });
-$("#colorSelector input").change(function() {
+/*$("#colorSelector input").change(function() {
     changeColor();
-});
+});*/
 function changeColor() {
     var hslArr = [0, 0, 0];
 	hslArr[0] = $("#sliderH").val();
@@ -33,7 +42,7 @@ function changeColor() {
 	colorText = "rgb("+(255-colorArr[0])+", "+(255-colorArr[1])+", "+(255-colorArr[2])+")";
 	$("#" + selected + " .letterStroke").css("stroke", colorText);
 }
-		
+
 // Used/modified under the MIT license
 // from https://github.com/JuhQ/rgb-to-hsl/blob/master/index.js
 function rgb2hsl(rgbArr) {
@@ -70,7 +79,7 @@ function rgb2hsl(rgbArr) {
 	//l = (l * 100);
 	return [h, s, l];
 }
-		
+
 		// Used/modified under the ISC license (as specified in package.json)
 		// from https://github.com/kayellpeee/hsl_rgb_converter/blob/master/converter.js
 		// expected hue range: [0, 360)
