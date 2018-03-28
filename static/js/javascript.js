@@ -13,8 +13,11 @@ if(selected == $(this).prop("id")) {
   console.log(colorText);
   $('#cp1').colorpicker({format: "rgba"}).on('colorpickerChange colorpickerCreate', function (e) {
         colorText = e.color.toString(e.color.toRgbString);
-        console.log(e.color.toRgb());
+        r = e.color.toRgb().r;
+        g = e.color.toRgb().g;
+        b = e.color.toRgb().b;
         $("#" + selected + " .letterFill").css("fill", colorText);
+        
       });
         // potential outline TODO e.color.complement().toRgbString());
 	//$("#" + selected + " .letterStroke").css("stroke", colorText);
