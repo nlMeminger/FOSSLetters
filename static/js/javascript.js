@@ -11,9 +11,9 @@ if(selected == $(this).prop("id")) {
 	$("#colorSelector").show();
   var colorText = $(this).find(".letterFill").css("fill");
   console.log(colorText);
-  $('#cp1').colorpicker({format: "rgb"}).on('colorpickerChange colorpickerCreate', function (e) {
-        console.log(e.color.toString(e.color.toRgb()))
-        colorText = e.color.toString(e.color.toRgb());
+  $('#cp1').colorpicker({format: "rgba"}).on('colorpickerChange colorpickerCreate', function (e) {
+        colorText = e.color.toString(e.color.toRgbString);
+        console.log(e.color.toRgb());
         $("#" + selected + " .letterFill").css("fill", colorText);
       });
         // potential outline TODO e.color.complement().toRgbString());
