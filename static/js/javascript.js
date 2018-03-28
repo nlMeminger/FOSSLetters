@@ -17,7 +17,7 @@ if(selected == $(this).prop("id")) {
         g = e.color.toRgb().g;
         b = e.color.toRgb().b;
         $("#" + selected + " .letterFill").css("fill", colorText);
-        
+
       });
         // potential outline TODO e.color.complement().toRgbString());
 	//$("#" + selected + " .letterStroke").css("stroke", colorText);
@@ -25,3 +25,22 @@ if(selected == $(this).prop("id")) {
 }
 });
 });
+
+function letter_update(){
+  $.ajax({
+    url : "letter_update/",
+    type : "POST",
+    data: { the_post : $('#letter_update').val()},
+
+    success: function(json) {
+      $('letter-update').val('');
+      console.log(json);
+      console.log("success");
+    },
+    error : function(xhr,errmsg,err) {
+        $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+            " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+  });
+};

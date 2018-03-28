@@ -22,4 +22,5 @@ from . import views
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
-] 
+    url(r'^letter_update/', views.create_post, name='create_post'),
+]

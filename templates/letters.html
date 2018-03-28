@@ -43,11 +43,13 @@
 			<input id="sliderS" type="range" min="0" max="1" step="0.01"/><br>-->
 		</div>
 		<div>
-			<form action="/update/" method="post">
-				<input id="letter" type="hidden" value=""/>
-				<input id="r" type="hidden" value=""/>
-				<input id="g" type="hidden" value=""/>
-				<input id="b" type="hidden" value=""/>
+			<form action="/letter_update/" method="POST" id="letter_update">
+				{% csrf_token %}
+	 			<div class="fieldWrapper" id="the_post">
+			 		{{ form }}
+	 			</div>
+	 			<div id="results"></div> <!-- errors go here -->
+	 			<input type="submit" value="Post" class="tiny button">
 			</form>
 		</div>
 	</main>
