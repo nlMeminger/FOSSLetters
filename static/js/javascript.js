@@ -21,3 +21,4 @@ if(selected == $(this).prop("id")) {
   $(this).find(".letterStroke").css("stroke", colorText);
 }
 });
+});
