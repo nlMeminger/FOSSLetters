@@ -11,12 +11,13 @@ import logging
 import json
 
 def create_post(request):
-	logger = logging.getLogger(__name__)
 	if request.method == 'POST':
-		logger.error("SIMPSON")
-		letter_update = request.POST.get('the_post')
+		letter_update = request.POST
 		response_data = {}
-		post = Letter(letter_update)
+		post = Letter.objects.get(letter=letter_update['letter'])
+		post.cur_r = letter_update['cur_r']
+		post.cur_g = letter_update['cur_g']
+		post.cur_b = letter_update['cur_b']
 		post.save()
 
 		response_data['result'] = 'Create post successful!'
@@ -24,7 +25,6 @@ def create_post(request):
 		response_data['cur_r'] = post.cur_r
 		response_data['cur_g'] = post.cur_g
 		response_data['cur_b'] = post.cur_b
-		# response_data['info_we_need'] = post
 
 		return HttpResponse(json.dumps(response_data), content_type="application/json")
 	else:
