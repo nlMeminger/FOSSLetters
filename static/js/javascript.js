@@ -7,6 +7,7 @@ if(selected == $(this).prop("id")) {
     $("#colorSelector").hide();
 } else {
     selected = $(this).prop("id");
+    $('#id_letter').val(selected.substr(-1))
 	$(".magicL .letterStroke").css("stroke", "black");
 	$("#colorSelector").show();
   var colorText = $(this).find(".letterFill").css("fill");
@@ -17,7 +18,9 @@ if(selected == $(this).prop("id")) {
         g = e.color.toRgb().g;
         b = e.color.toRgb().b;
         $("#" + selected + " .letterFill").css("fill", colorText);
-
+        $('#id_cur_r').val(r);
+        $('#id_cur_g').val(g);
+        $('#id_cur_b').val(b);
       });
         // potential outline TODO e.color.complement().toRgbString());
 	//$("#" + selected + " .letterStroke").css("stroke", colorText);
