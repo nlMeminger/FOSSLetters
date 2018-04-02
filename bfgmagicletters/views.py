@@ -15,7 +15,6 @@ def create_post(request):
     	logger.debug("FIND ME")
         letter_update = request.POST.get('the_post')
         response_data = {}
-
         post = Letter(letter=letter_update)
         post.save()
 
