@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from letter.models import Letter
 from bfgmagicletters import opc
 from bfgmagicletters import color_utils
@@ -7,15 +8,15 @@ import time
 import math
 import sys
 import logging
-logger = logging.getLogger(__name__)
+import json
 
 def create_post(request):
-	logger.debug("FIND ME")
+	logger = logging.getLogger(__name__)
 	if request.method == 'POST':
-		logger.debug("FIND ME")
+		logger.error("SIMPSON")
 		letter_update = request.POST.get('the_post')
 		response_data = {}
-		post = Letter(letter=letter_update)
+		post = Letter(letter_update)
 		post.save()
 
 		response_data['result'] = 'Create post successful!'
@@ -23,16 +24,11 @@ def create_post(request):
 		response_data['cur_r'] = post.cur_r
 		response_data['cur_g'] = post.cur_g
 		response_data['cur_b'] = post.cur_b
+		# response_data['info_we_need'] = post
 
-		return HttpResponse(
-			json.dumps(response_data),
-			content_type="application/json"
-		)
+		return HttpResponse(json.dumps(response_data), content_type="application/json")
 	else:
-		return HttpResponse(
-			json.dumps({"nothing to see": "this isn't happening"}),
-			content_type="application/json"
-		)
+		return HttpResponse(json.dumps({"nothing to see": "this isn't happening"}),content_type="application/json")
 
 def home(request):
 	letter_M = Letter.objects.get(letter='M')
