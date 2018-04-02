@@ -22,7 +22,9 @@ if(selected == $(this).prop("id")) {
         $('#id_cur_g').val(g);
         $('#id_cur_b').val(b);
         $('#id_letter').val(selected.substr(-1));
+        $("#letter_update").submit();
       });
+
         // potential outline TODO e.color.complement().toRgbString());
 	//$("#" + selected + " .letterStroke").css("stroke", colorText);
   $(this).find(".letterStroke").css("stroke", colorText);
