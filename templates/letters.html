@@ -42,8 +42,9 @@
 			<input id="sliderL" type="range" min="0" max="1" step="0.01"/><br>
 			<input id="sliderS" type="range" min="0" max="1" step="0.01"/><br>-->
 		</div>
+		<iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
 		<div>
-			<form action="/letter_update/" method="POST" id="letter_update">
+			<form action="/letter_update/" method="POST" id="letter_update" target="hiddenFrame">
 				{% csrf_token %}
 	 			<div class="fieldWrapper" id="the_post">
 			 		{{ form }}

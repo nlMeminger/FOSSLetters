@@ -11,7 +11,7 @@ if(selected == $(this).prop("id")) {
 	$(".magicL .letterStroke").css("stroke", "black");
 	$("#colorSelector").show();
   var colorText = $(this).find(".letterFill").css("fill");
-  console.log(colorText);
+  //console.log(colorText);
   $('#cp1').colorpicker({format: "rgba"}).on('colorpickerChange colorpickerCreate', function (e) {
         colorText = e.color.toString(e.color.toRgbString);
         r = e.color.toRgb().r;
@@ -21,6 +21,7 @@ if(selected == $(this).prop("id")) {
         $('#id_cur_r').val(r);
         $('#id_cur_g').val(g);
         $('#id_cur_b').val(b);
+        $('#id_letter').val(selected.substr(-1));
       });
         // potential outline TODO e.color.complement().toRgbString());
 	//$("#" + selected + " .letterStroke").css("stroke", colorText);
@@ -31,7 +32,7 @@ if(selected == $(this).prop("id")) {
 
 function letter_update(){
   $.ajax({
-    url : "letter_update/",
+    url : "letter_update",
     type : "POST",
     data: { the_post : $('#letter_update').val()},
 
