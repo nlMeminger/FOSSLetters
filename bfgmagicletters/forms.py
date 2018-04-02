@@ -6,16 +6,8 @@ class PostForm(forms.ModelForm):
         model = Letter
         fields = ['letter', 'cur_r', 'cur_g', 'cur_b']
         widgets = {
-            'letter': forms.TextInput(attrs={
-                id='letter-text'
-            }),
-            'cur_r': forms.TextInput(attrs={
-                id='r-text'
-            }),
-            'cur_g': forms.TextInput(attrs={
-                id='g-text'
-            }),
-            'cur_b': forms.TextInput(attrs={
-                id='b-text'
-            }),
+            'letter': forms.TextInput(attrs={'id': 'letter_input'}),
+            'cur_r': forms.TextInput(),
+            'cur_g': forms.TextInput(),
+            'cur_b': forms.TextInput(),
         }
