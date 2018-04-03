@@ -29,14 +29,12 @@ if(selected == $(this).prop("id")) {
 	$(".magicL .letterStroke").css("stroke", "black");
 	$("#colorSelector").show();
   var colorText = $(this).find(".letterFill").css("fill");
-  //console.log(colorText);
   $('#cp1').colorpicker({
     inline:true,
     format: "rgba",
     useAlpha: false,
   }).on('colorpickerChange colorpickerCreate', function (e) {
         colorText = e.color.toString(e.color.toRgbString);
-        console.log(colorText);
         r = e.color.toRgb().r;
         g = e.color.toRgb().g;
         b = e.color.toRgb().b;
