@@ -30,6 +30,47 @@ def create_post(request):
 	else:
 		return HttpResponse(json.dumps({"nothing to see": "this isn't happening"}),content_type="application/json")
 
+def create_reset(request):
+	if request.method == 'POST':
+		response_data = {}
+		post = Letter.objects.get(letter='M')
+		post.cur_r = post.def_r
+		post.cur_g = post.def_g
+		post.cur_b = post.def_b
+
+		post.save()
+
+		post = Letter.objects.get(letter='A')
+		post.cur_r = post.def_r
+		post.cur_g = post.def_g
+		post.cur_b = post.def_b
+
+		post.save()
+
+		post = Letter.objects.get(letter='G')
+		post.cur_r = post.def_r
+		post.cur_g = post.def_g
+		post.cur_b = post.def_b
+
+		post.save()
+
+		post = Letter.objects.get(letter='I')
+		post.cur_r = post.def_r
+		post.cur_g = post.def_g
+		post.cur_b = post.def_b
+
+		post.save()
+
+		post = Letter.objects.get(letter='C')
+		post.cur_r = post.def_r
+		post.cur_g = post.def_g
+		post.cur_b = post.def_b
+
+		post.save()
+	return HttpResponse(json.dumps(response_data), content_type="application/json")
+	#return render(request, 'letters.html',  {'M': letter_M, 'A': letter_A, 'G': letter_G, 'I': letter_I, 'C': letter_C})
+
+
 def home(request):
 	letter_M = Letter.objects.get(letter='M')
 	letter_A = Letter.objects.get(letter='A')

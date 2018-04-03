@@ -12,7 +12,24 @@ if(selected == $(this).prop("id")) {
 	$("#colorSelector").show();
   var colorText = $(this).find(".letterFill").css("fill");
   //console.log(colorText);
-  $('#cp1').colorpicker({format: "rgba"}).on('colorpickerChange colorpickerCreate', function (e) {
+  $('#cp1').colorpicker({
+    inline:true,
+    format: "rgba",
+    useAlpha: false,
+    /*customClass: 'colorpicker-2x',
+    sliders: {
+        saturation: {
+          maxLeft: 200,
+          maxTop: 200
+        },
+        hue: {
+          maxTop: 200
+        },
+        alpha: {
+          maxTop: 200
+        }
+    }*/
+    }).on('colorpickerChange colorpickerCreate', function (e) {
         colorText = e.color.toString(e.color.toRgbString);
         r = e.color.toRgb().r;
         g = e.color.toRgb().g;
@@ -40,6 +57,25 @@ function letter_update(){
 
     success: function(json) {
       $('letter-update').val('');
+      console.log(json);
+      console.log("success");
+    },
+    error : function(xhr,errmsg,err) {
+        $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+            " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+  });
+};
+
+function letter_reset(){
+  $.ajax({
+    url : "letter_reset",
+    type : "POST",
+    data: { the_reset : $('#reset_update').val()},
+
+    success: function(json) {
+      $('letter-reset').val('');
       console.log(json);
       console.log("success");
     },

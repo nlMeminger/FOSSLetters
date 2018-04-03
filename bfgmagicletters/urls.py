@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^letter_update/', views.create_post, name='create_post'),
+    url(r'^letter_reset/', views.create_reset, name='create_reset'),
 ]
