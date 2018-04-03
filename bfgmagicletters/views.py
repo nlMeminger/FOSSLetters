@@ -19,20 +19,12 @@ def create_post(request):
 		post.cur_g = letter_update['cur_g']
 		post.cur_b = letter_update['cur_b']
 		post.save()
-
-		response_data['result'] = 'Create post successful!'
-		response_data['letter'] = post.letter
-		response_data['cur_r'] = post.cur_r
-		response_data['cur_g'] = post.cur_g
-		response_data['cur_b'] = post.cur_b
-
 		return HttpResponse(json.dumps(response_data), content_type="application/json")
 	else:
 		return HttpResponse(json.dumps({"nothing to see": "this isn't happening"}),content_type="application/json")
 
 def create_reset(request):
-	if request.method == 'POST':
-		response_data = {}
+	if request.method == 'GET':
 		post = Letter.objects.get(letter='M')
 		post.cur_r = post.def_r
 		post.cur_g = post.def_g
@@ -67,7 +59,8 @@ def create_reset(request):
 		post.cur_b = post.def_b
 
 		post.save()
-	return HttpResponse(content_type="application/json")
+		response_data = {'success':1}
+	return HttpResponse(json.dumps(response_data), content_type="application/json")
 	#return render(request, 'letters.html',  {'M': letter_M, 'A': letter_A, 'G': letter_G, 'I': letter_I, 'C': letter_C})
 
 

@@ -42,15 +42,15 @@
 			 		{{ form }}
 	 			</div>
 	 			<div id="results"></div> <!-- errors go here -->
-	 			<input type="submit" value="Post" class="tiny button">
+	 			<input type="submit" value="Post" class="button">
 			</form>
 		</div>
-		<form action="/letter_reset/" method="POST" id="reset_update" target="hiddenFrame">
+		<iframe name="hiddenFrame2" width="0" height="0" border="0" style="display: none;"></iframe>
+		<form action="/letter_reset/" method="GET" id="letter_reset" target="hiddenFrame2">
 			{% csrf_token %}
 			<div style="display: none;" class="fieldWrapper" id="the_reset">
-			 		<!--{{ form }}-->z
 			</div>
-			<input type="submit" value="Reset to Magic Colors" class="tiny button"/>
+			<input id="reset_button" type="button" value="Reset to Magic Colors" class="tiny button"/>
 		</form>
 	</main>
 {% endblock %}
