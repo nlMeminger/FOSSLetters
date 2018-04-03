@@ -1,4 +1,22 @@
+var colors = {M: "#eb2f2e", A: "#f49d26",G: "#2eb150", I: "#3a509f", C: "#7e4c9b"};
+
 $(document).ready(function(){
+  /*window.addEventListener("DOMContentLoaded", function () {
+    $('.tiny button').click(function(){
+      $("reset_button").addEventListener("click",function(){
+        $("letter_reset").submit();
+      });
+    });
+  });*/
+  $('#letter_reset').on('click', function(event){
+    event.preventDefault();
+    $("#magicM .letterFill").css("fill", colors.M);
+    $("#magicA .letterFill").css("fill", colors.A);
+    $("#magicG .letterFill").css("fill", colors.G);
+    $("#magicI .letterFill").css("fill", colors.I);
+    $("#magicC .letterFill").css("fill", colors.C);
+    $("#letter_reset").submit();
+  });
 var selected = "";
 $(".magicL").click(function() {
 if(selected == $(this).prop("id")) {
@@ -16,8 +34,9 @@ if(selected == $(this).prop("id")) {
     inline:true,
     format: "rgba",
     useAlpha: false,
-    }).on('colorpickerChange colorpickerCreate', function (e) {
+  }).on('colorpickerChange colorpickerCreate', function (e) {
         colorText = e.color.toString(e.color.toRgbString);
+        console.log(colorText);
         r = e.color.toRgb().r;
         g = e.color.toRgb().g;
         b = e.color.toRgb().b;
@@ -43,7 +62,7 @@ function letter_update(){
     data: { the_post : $('#letter_update').val()},
 
     success: function(json) {
-      $('letter-update').val('');
+      $('letter_update').val('');
       console.log(json);
       console.log("success");
     },
@@ -57,12 +76,13 @@ function letter_update(){
 
 function letter_reset(){
   $.ajax({
-    url : "letter_reset/",
-    type : "POST",
-    data: { the_reset : $('#reset_update').val()},
+    url : "letter_reset",
+    type : "get",
+    // data: { the_reset : $('#letter_reset').val()},
 
     success: function(json) {
-      $('letter-reset').val('');
+      alert(data);
+      // $('letter_reset').val('');
       console.log(json);
       console.log("success");
     },
