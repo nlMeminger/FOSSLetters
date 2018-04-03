@@ -32,7 +32,7 @@
 			</g>
 		</svg>
 		<div id="colorSelector">
-			<input id="cp1" style="width: 25%;" type="text" class="form-control input-lg" value=""/>
+			<input id="cp1" style="width: auto;" type="text" class="form-control input-lg" value=""/>
 		</div>
 		<iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
 		<div>
@@ -45,10 +45,10 @@
 	 			<input type="submit" value="Post" class="tiny button">
 			</form>
 		</div>
-		<form style="display:hidden;" action="/letter_reset/" method="POST" id="reset_update" target="hiddenFrame">
+		<form action="/letter_reset/" method="POST" id="reset_update" target="hiddenFrame">
 			{% csrf_token %}
-			<div class="fieldWrapper" id="the_reset">
-			 		<!--{{ form }}-->
+			<div style="display: none;" class="fieldWrapper" id="the_reset">
+			 		<!--{{ form }}-->z
 			</div>
 			<input type="submit" value="Reset to Magic Colors" class="tiny button"/>
 		</form>

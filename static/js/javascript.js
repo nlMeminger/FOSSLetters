@@ -16,19 +16,6 @@ if(selected == $(this).prop("id")) {
     inline:true,
     format: "rgba",
     useAlpha: false,
-    /*customClass: 'colorpicker-2x',
-    sliders: {
-        saturation: {
-          maxLeft: 200,
-          maxTop: 200
-        },
-        hue: {
-          maxTop: 200
-        },
-        alpha: {
-          maxTop: 200
-        }
-    }*/
     }).on('colorpickerChange colorpickerCreate', function (e) {
         colorText = e.color.toString(e.color.toRgbString);
         r = e.color.toRgb().r;
@@ -70,7 +57,7 @@ function letter_update(){
 
 function letter_reset(){
   $.ajax({
-    url : "letter_reset",
+    url : "letter_reset/",
     type : "POST",
     data: { the_reset : $('#reset_update').val()},
 

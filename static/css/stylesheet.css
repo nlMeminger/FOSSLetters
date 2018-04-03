@@ -49,3 +49,13 @@ main {
 	border-radius: 10px;
 }
 */
+.colorpicker-hue {
+		 height: 200px;
+		 width: 30px;
+		 background-size: 30px 200px;
+ }
+ .colorpicker-saturation {
+		 width: 200px;
+		 height: 200px;
+		 background-size: 200px 200px;
+ }

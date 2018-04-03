@@ -67,7 +67,7 @@ def create_reset(request):
 		post.cur_b = post.def_b
 
 		post.save()
-	return HttpResponse(json.dumps(response_data), content_type="application/json")
+	return HttpResponse(content_type="application/json")
 	#return render(request, 'letters.html',  {'M': letter_M, 'A': letter_A, 'G': letter_G, 'I': letter_I, 'C': letter_C})
 
 
