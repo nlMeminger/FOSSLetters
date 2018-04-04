@@ -19,6 +19,24 @@ def create_post(request):
 		post.cur_g = letter_update['cur_g']
 		post.cur_b = letter_update['cur_b']
 		post.save()
+
+
+		IP_PORT = '127.0.0.1:7890'
+		client = opc.Client(IP_PORT)
+
+		n_pixels = 79
+		fps = 60
+
+		pixels = []
+		for ii in range(n_pixels):
+			pct = (ii / n_pixels)
+			r = post.cur_r
+			g = post.cur_g
+			b = post.cur_b
+			pixels.append((r, g, b))
+		client.put_pixels(pixels, channel=0)
+
+
 		return HttpResponse(json.dumps(response_data), content_type="application/json")
 	else:
 		return HttpResponse(json.dumps({"nothing to see": "this isn't happening"}),content_type="application/json")
@@ -75,15 +93,15 @@ def home(request):
 	IP_PORT = '127.0.0.1:7890'
 	client = opc.Client(IP_PORT)
 
-	n_pixels = 20
+	n_pixels = 30
 	fps = 60
 
 	pixels = []
 	for ii in range(n_pixels):
 		pct = (ii / n_pixels)
-		r = 255
-		g = 0
-		b = 0
+		r = letter_A.cur_r
+		g = letter_A.cur_g
+		b = letter_A.cur_b
 		pixels.append((r, g, b))
 	client.put_pixels(pixels, channel=0)
 
