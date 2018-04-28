@@ -29,14 +29,12 @@ if(selected == $(this).prop("id")) {
 	$(".magicL .letterStroke").css("stroke", "black");
 	$("#colorSelector").show();
   var colorText = $(this).find(".letterFill").css("fill");
-  //console.log(colorText);
   $('#cp1').colorpicker({
     inline:true,
     format: "rgba",
     useAlpha: false,
   }).on('colorpickerChange colorpickerCreate', function (e) {
         colorText = e.color.toString(e.color.toRgbString);
-        console.log(colorText);
         r = e.color.toRgb().r;
         g = e.color.toRgb().g;
         b = e.color.toRgb().b;
@@ -61,16 +59,16 @@ function letter_update(){
     type : "POST",
     data: { the_post : $('#letter_update').val()},
 
-    success: function(json) {
-      $('letter_update').val('');
-      console.log(json);
-      console.log("success");
-    },
-    error : function(xhr,errmsg,err) {
-        $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-            " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-    }
+    // success: function(json) {
+    //   $('letter_update').val('');
+    //   console.log(json);
+    //   console.log("success");
+    // },
+    // error : function(xhr,errmsg,err) {
+    //     $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+    //         " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+    //     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    // }
   });
 };
 
@@ -80,16 +78,16 @@ function letter_reset(){
     type : "get",
     // data: { the_reset : $('#letter_reset').val()},
 
-    success: function(json) {
-      alert(data);
-      // $('letter_reset').val('');
-      console.log(json);
-      console.log("success");
-    },
-    error : function(xhr,errmsg,err) {
-        $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-            " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-    }
+    // success: function(json) {
+    //   alert(data);
+    //   // $('letter_reset').val('');
+    //   console.log(json);
+    //   console.log("success");
+    // },
+    // error : function(xhr,errmsg,err) {
+    //     $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+    //         " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+    //     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    // }
   });
 };

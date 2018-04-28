@@ -2,15 +2,17 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from letter.models import Letter
 from bfgmagicletters import opc
-from bfgmagicletters import color_utils
+# from bfgmagicletters import color_utils
 from .forms import PostForm
-import time
-import math
-import sys
-import logging
+# import time
+# import math
+# import sys
+# import logging
 import json
 
+
 def create_post(request):
+	"""Create a post and updates the db."""
 	if request.method == 'POST':
 		letter_update = request.POST
 		response_data = {}
@@ -19,7 +21,6 @@ def create_post(request):
 		post.cur_g = letter_update['cur_g']
 		post.cur_b = letter_update['cur_b']
 		post.save()
-
 
 		IP_PORT = '127.0.0.1:7890'
 		client = opc.Client(IP_PORT)
@@ -39,9 +40,13 @@ def create_post(request):
 
 		return HttpResponse(json.dumps(response_data), content_type="application/json")
 	else:
-		return HttpResponse(json.dumps({"nothing to see": "this isn't happening"}),content_type="application/json")
+		return HttpResponse(
+			json.dumps({"nothing to see": "this isn't happening"}),
+			content_type="application/json")
+
 
 def create_reset(request):
+	"""Create a reset color to default call"""
 	if request.method == 'GET':
 		post = Letter.objects.get(letter='M')
 		post.cur_r = post.def_r
@@ -77,12 +82,13 @@ def create_reset(request):
 		post.cur_b = post.def_b
 
 		post.save()
-		response_data = {'success':1}
-	return HttpResponse(json.dumps(response_data), content_type="application/json")
-	#return render(request, 'letters.html',  {'M': letter_M, 'A': letter_A, 'G': letter_G, 'I': letter_I, 'C': letter_C})
+		response_data = {'success': 1}
+	return HttpResponse(
+		json.dumps(response_data), content_type="application/json")
 
 
 def home(request):
+	"""Load page"""
 	letter_M = Letter.objects.get(letter='M')
 	letter_A = Letter.objects.get(letter='A')
 	letter_G = Letter.objects.get(letter='G')
@@ -105,4 +111,6 @@ def home(request):
 		pixels.append((r, g, b))
 	client.put_pixels(pixels, channel=0)
 
-	return render(request, 'letters.html', {'M': letter_M, 'A': letter_A, 'G': letter_G, 'I': letter_I, 'C': letter_C, 'form': form})
+	return render(request, 'letters.html', {
+		'M': letter_M, 'A': letter_A, 'G': letter_G,
+		'I': letter_I, 'C': letter_C, 'form': form})
