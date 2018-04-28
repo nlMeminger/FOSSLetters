@@ -21,21 +21,44 @@ def create_post(request):
 		post.cur_g = letter_update['cur_g']
 		post.cur_b = letter_update['cur_b']
 		post.save()
+		let = letter_update['letter']
 
 		IP_PORT = '127.0.0.1:7890'
 		client = opc.Client(IP_PORT)
 
-		n_pixels = 79
+		if let == "M":
+			start_pixels = 0
+			end_pixels = 46
+			cur_channel = 0
+		elif let == "A":
+			start_pixels = 47
+			end_pixels = 87
+			cur_channel = 1
+		elif let == "G":
+			start_pixels = 88
+			end_pixels = 128
+			cur_channel = 2
+		elif let == "I":
+			start_pixels = 129
+			end_pixels = 145
+			cur_channel = 3
+		else:
+			start_pixels = 174
+			end_pixels = 198
+			cur_channel = 4
+
+
 		fps = 60
 
 		pixels = []
-		for ii in range(n_pixels):
-			pct = (ii / n_pixels)
+		# for ii in range(start_pixels, end_pixels):
+		for ii in range(0, 900):
+			# pct = (ii / n_pixels)
 			r = post.cur_r
 			g = post.cur_g
 			b = post.cur_b
 			pixels.append((r, g, b))
-		client.put_pixels(pixels, channel=0)
+		client.put_pixels(pixels, channel=cur_channel)
 
 
 		return HttpResponse(json.dumps(response_data), content_type="application/json")
