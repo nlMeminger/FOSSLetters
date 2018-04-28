@@ -27,24 +27,14 @@ def create_post(request):
 		client = opc.Client(IP_PORT)
 
 		if let == "M":
-			start_pixels = 0
-			end_pixels = 46
 			cur_channel = 0
 		elif let == "A":
-			start_pixels = 47
-			end_pixels = 87
 			cur_channel = 1
 		elif let == "G":
-			start_pixels = 88
-			end_pixels = 128
 			cur_channel = 2
 		elif let == "I":
-			start_pixels = 129
-			end_pixels = 145
 			cur_channel = 3
 		else:
-			start_pixels = 174
-			end_pixels = 198
 			cur_channel = 4
 
 
@@ -71,40 +61,80 @@ def create_post(request):
 def create_reset(request):
 	"""Create a reset color to default call"""
 	if request.method == 'GET':
+		pixels = []
+		IP_PORT = '127.0.0.1:7890'
+		client = opc.Client(IP_PORT)
+
 		post = Letter.objects.get(letter='M')
 		post.cur_r = post.def_r
 		post.cur_g = post.def_g
 		post.cur_b = post.def_b
-
 		post.save()
+		for ii in range(0, 512):
+			# pct = (ii / n_pixels)
+			r = post.cur_r
+			g = post.cur_g
+			b = post.cur_b
+			pixels.append((r, g, b))
+		client.put_pixels(pixels, channel=0)
 
+		pixels = []
 		post = Letter.objects.get(letter='A')
 		post.cur_r = post.def_r
 		post.cur_g = post.def_g
 		post.cur_b = post.def_b
-
 		post.save()
+		for ii in range(0, 512):
+			# pct = (ii / n_pixels)
+			r = post.cur_r
+			g = post.cur_g
+			b = post.cur_b
+			pixels.append((r, g, b))
+		client.put_pixels(pixels, channel=1)
 
+		pixels = []
 		post = Letter.objects.get(letter='G')
 		post.cur_r = post.def_r
 		post.cur_g = post.def_g
 		post.cur_b = post.def_b
-
 		post.save()
+		for ii in range(0, 512):
+			# pct = (ii / n_pixels)
+			r = post.cur_r
+			g = post.cur_g
+			b = post.cur_b
+			pixels.append((r, g, b))
+		client.put_pixels(pixels, channel=2)
 
+		pixels = []
 		post = Letter.objects.get(letter='I')
 		post.cur_r = post.def_r
 		post.cur_g = post.def_g
 		post.cur_b = post.def_b
-
 		post.save()
+		for ii in range(0, 512):
+			# pct = (ii / n_pixels)
+			r = post.cur_r
+			g = post.cur_g
+			b = post.cur_b
+			pixels.append((r, g, b))
+		client.put_pixels(pixels, channel=3)
 
+		pixels = []
 		post = Letter.objects.get(letter='C')
 		post.cur_r = post.def_r
 		post.cur_g = post.def_g
 		post.cur_b = post.def_b
-
 		post.save()
+		for ii in range(0, 512):
+			# pct = (ii / n_pixels)
+			r = post.cur_r
+			g = post.cur_g
+			b = post.cur_b
+			pixels.append((r, g, b))
+		client.put_pixels(pixels, channel=4)
+
+
 		response_data = {'success': 1}
 	return HttpResponse(
 		json.dumps(response_data), content_type="application/json")
