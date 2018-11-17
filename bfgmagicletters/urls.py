@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 
 """
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib import admin
 from . import views
 
@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^letter_update/', views.create_post, name='create_post'),
     url(r'^letter_reset/', views.create_reset, name='letter_reset'),
+    url(r'^sms/', include('sms.urls')),
 ]

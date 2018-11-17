@@ -25,7 +25,7 @@ SECRET_KEY = '_j94x$3%o5(5a+-aeqc$&q3m(+2p0(af7qe()%ouc1_&ms_j_d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1","magicletters.kylesuero.com","magicletters.serveo.net"]
 
 
 # Application definition
